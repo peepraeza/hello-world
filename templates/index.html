@@ -8,7 +8,7 @@
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Climate</title>
- 
+
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
 
@@ -21,6 +21,14 @@
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="static/img/logomi.png">
+	<style>
+		/* Always set the map height explicitly to define the size of the div
+		 * element that contains the map. */
+		#map {
+			height: 500px;
+			width: 100%;
+		}
+	</style>
 </head>
 
 <body id="mimin" class="dashboard">
@@ -44,7 +52,7 @@
         </div>
       <!-- end: Left Menu -->
 
-	
+
       <!-- start: content -->
         <div id="content">
             <div class="panel">
@@ -70,12 +78,12 @@
                        <div class="wheather">
                         <div class="stormy rainy animated pulse infinite">
                           <div class="shadow">
-                            
+
                           </div>
                         </div>
                         <div class="sub-wheather">
                           <div class="thunder">
-                            
+
                           </div>
                           <div class="rain">
                               <div class="droplet droplet1"></div>
@@ -87,9 +95,9 @@
                             </div>
                         </div>
                       </div>
-                    </div>                   
+                    </div>
                 </div>
-              </div>                    
+              </div>
             </div>
 
             <div class="col-md-12" style="padding:20px;">
@@ -138,18 +146,17 @@
                         <div class="col-md-12">
                             <div class="panel box-v4">
                                 <div class="panel-body padding-0">
-                                   
-                                    <div class="calendar">
-                                      
-                                    </div>
+
+                                    <div id="map"></div>
+
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="col-md-12 padding-0">
                           <div class="panel box-v2">
-                              
+
                               <div class="panel-body">
                                 <div class="col-md-12 padding-0 text-center">
                                   <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
@@ -183,7 +190,7 @@
                                 </center>
                             </div>
                           </div>
-                        </div>            
+                        </div>
                     </div>
                 </div>
 
@@ -293,7 +300,7 @@
             <ul class="nav nav-list">
                 <li class="active ripple">
                   <a class="tree-toggle nav-header">
-                    <span class="fa-home fa"></span>Dashboard 
+                    <span class="fa-home fa"></span>Dashboard
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
@@ -419,7 +426,7 @@
                 <li><a href="credits.html">Credits</a></li>
               </ul>
         </div>
-    </div>       
+    </div>
   </div>
   <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
     <span class="fa fa-bars"></span>
@@ -631,7 +638,7 @@
             });
 
         };
-    
+
     //  end:  Chart =============
 
     // start: Calendar =========
@@ -717,6 +724,39 @@
     // end: Maps==============
 
   })(jQuery);
+
+	function initMap() {
+		// Create a map object and specify the DOM element for display.
+		var locations = [
+			 ['Title A', 13.180967,102.715546],
+			 ['Title B', 13.200848,101.616669],
+			 ['Title C', 13.147372,104.597443],
+			 ['Title D', 13.19125,103.710052]
+		];
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 13.736717, lng: 100.523186},
+			zoom: 5
+			//mapTypeId:google.maps.MapTypeId.HYBRID
+		});
+		var infowindow = new google.maps.InfoWindow;
+		var marker, i;
+
+		for (i = 0; i < locations.length; i++) {
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+				map: map
+			});
+			google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+					infowindow.setContent(locations[i][0]);
+					infowindow.open(map, marker);
+				}
+			})(marker, i));
+		}
+	}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjE02o0x9218Hz1McqFlrN3quz545-Vcs&callback=initMap"
+async defer>
  </script>
 <!-- end: Javascript -->
 </body>

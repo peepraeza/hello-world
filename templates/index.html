@@ -223,11 +223,11 @@
                               </div>
                               <div class="col-md-12" style="padding-top:20px;">
                                   <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                      <h2 style="line-height:.4;">100</h2>
+                                      <h2 style="line-height:.4;">48.0</h2>
                                       <small>Total Rain Volumn</small>
                                   </div>
                                   <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                      <h2 style="line-height:.4;">50.3</h2>
+                                      <h2 style="line-height:.4;">5.0</h2>
                                       <small>Maximum</small>
                                   </div>
                                   <div class="col-md-4 col-sm-4 col-xs-12 text-center">
@@ -363,9 +363,9 @@
         return Math.round(Math.random() * 100);
     };
     var lineChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July",
-									"January", "February", "March", "April", "May", "June", "July",
-									"January", "February", "March", "April", "May", "June", "July"],
+        labels: ["00.00", "01.00", "02.00", "03.00", "04.00", "05.00", "06.00", "07.00",
+                 "08.00", "09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00",
+                 "16.00", "17.00", "18.00", "19.00", "20.00", "21.00", "22.00", "23.00"],
         datasets: [{
             label: "My First dataset",
             fillColor: "rgba(21,186,103,0.4)",
@@ -374,9 +374,8 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-             data: [100,9,5,7,4.5,4,5,4.5,6,5.6,7.5,
-						 				100,9,5,7,4.5,4,5,4.5,6,5.6,7.5,
-										100,9,5,7,4.5,4,5,4.5,6,5.6,7.5]
+             data: [0.0, 0.5, 2.5, 2.0, 0.5, 0.0, 0.0, 0.5, 0.5, 2.5, 4.5, 3.0,
+                    2.0, 2.5, 0.5, 4.0, 2.0, 5.0, 4.5, 2.0, 1.0, 2.0, 3.0, 3.0]
         }/*, {
             label: "My Second dataset",
             fillColor: "rgba(21,113,186,0.5)",
@@ -458,27 +457,32 @@
 
         ];
 
-    /*var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+    var barChartData = {
+            labels: ["00.00", "01.00", "02.00", "03.00", "04.00", "05.00", "06.00", "07.00",
+                     "08.00", "09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00",
+                     "16.00", "17.00", "18.00", "19.00", "20.00", "21.00", "22.00", "23.00"],
+
             datasets: [
-                {
+                /*{
                     label: "My First dataset",
                     fillColor: "rgba(21,186,103,0.4)",
                     strokeColor: "rgba(220,220,220,0.8)",
                     highlightFill: "rgba(21,186,103,0.2)",
                     highlightStroke: "rgba(21,186,103,0.2)",
                     data: [65, 59, 80, 81, 56, 55, 40]
-                },
+                },*/
                 {
                     label: "My Second dataset",
                     fillColor: "rgba(21,113,186,0.5)",
                     strokeColor: "rgba(151,187,205,0.8)",
                     highlightFill: "rgba(21,113,186,0.2)",
                     highlightStroke: "rgba(21,113,186,0.2)",
-                    data: [28, 48, 40, 19, 86, 27, 90]
+                    data: [286.4, 280.3, 279.4, 276.4, 280.4, 288, 290, 287,
+                           286.4, 280.3, 279.4, 276.4, 280.4, 288, 290, 287,
+                           286.4, 280.3, 279.4, 276.4, 280.4, 288, 290, 287]
                 }
             ]
-        };*/
+        };
 
      window.onload = function(){
             var ctx = $(".doughnut-chart")[0].getContext("2d");
@@ -496,7 +500,7 @@
             });
 
             var ctx3 = $(".bar-chart")[0].getContext("2d");
-            window.myLine = new Chart(ctx3).Bar(lineChartData, {
+            window.myLine = new Chart(ctx3).Bar(barChartData, {
                  responsive: true,
                     showTooltips: true
             });
@@ -613,8 +617,8 @@
 		var test = {{ station }};
 		var i;
 		var locations = [];
-		
-		for (i = 0; i < test.length; i++) {		
+
+		for (i = 0; i < test.length; i++) {
     	locations.push({lat:test[i][0], lng:test[i][1]});
 		}
     var map = new google.maps.Map(document.getElementById('map'), {

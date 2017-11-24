@@ -34,7 +34,7 @@
 <body id="mimin" class="dashboard">
       <!-- start: Header -->
 	<nav class="navbar navbar-default header navbar-fixed-top">
-		<a class="navbar-brand"> 
+		<a class="navbar-brand">
         	<b>Climate</b>
         </a>
 	</nav>
@@ -179,7 +179,7 @@
                                       <h3>3/5/2017</h3>
                                       <p>End</p>
                                   </div>
-                                  
+
                                 </div>
                               </div>
                           </div>
@@ -193,19 +193,19 @@
                             <div class="panel-body">
 
 							<!--calender-->
-							
+
 							<!--end calendar-->
 
                             </div>
                             <div class="panel-footer bg-white border-none">
-                                
+
                             </div>
                           </div>
                         </div>
                     </div>
                 </div>
 
-              <div class="col-md-12 card-wrap padding-0">
+              <div class="card-wrap padding-0">
                 <div class="col-md-6">
                     <div class="panel">
                       <div class="panel-heading bg-white border-none" style="padding:20px;">
@@ -240,7 +240,7 @@
                       </div>
                     </div>
                 </div>
-
+								<!--
                 <div class="col-md-6">
                     <div class="panel">
                       <div class="panel-heading bg-white border-none" style="padding:20px;">
@@ -275,6 +275,7 @@
                       </div>
                     </div>
                 </div>
+							-->
                 </div>
                 <div class="col-md-12">
                     <div class="panel bg-green text-white">
@@ -599,17 +600,32 @@
 	function initMap() {
 		// Create a map object and specify the DOM element for display.
 		var locations = [
-			 ['Title A', 13.180967,102.715546],
-			 ['Title B', 13.200848,101.616669],
-			 ['Title C', 13.147372,104.597443],
-			 ['Title D', 13.19125,103.710052]
-		];
+        {lat: 18.8065278, lng: 95.907694},
+        {lat: 18.8065278, lng: 93.907694},
+        {lat: 18.8035278, lng: 92.907694},
+        {lat: 18.8023212, lng: 97.907694},
+        {lat: 18.8015278, lng: 91.407694},
+        {lat: 18.8122278, lng: 97.650764},
+      ]
 		var map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 13.736717, lng: 100.523186},
 			zoom: 5
 			//mapTypeId:google.maps.MapTypeId.HYBRID
 		});
-		var infowindow = new google.maps.InfoWindow;
+
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }
+		/*var infowindow = new google.maps.InfoWindow;
 		var marker, i;
 
 		for (i = 0; i < locations.length; i++) {
@@ -624,8 +640,10 @@
 				}
 			})(marker, i));
 		}
-	}
+	}*/
 </script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+	 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjE02o0x9218Hz1McqFlrN3quz545-Vcs&callback=initMap"
 async defer>
  </script>

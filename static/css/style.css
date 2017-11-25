@@ -3152,7 +3152,7 @@ ul li a:focus {
   margin-top: -10px;
 }
 
-.droplet {
+.rain .droplet {
   width: 2px;
   height: 10px;
   margin-top: 0px;
@@ -3184,19 +3184,19 @@ ul li a:focus {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.droplet2,
-.droplet5 {
+.rain .droplet2,
+.rain .droplet5 {
   margin-left: 20px;
 }
 
-.droplet3,
-.droplet6 {
+.rain .droplet3,
+.rain .droplet6 {
   margin-left: 40px;
 }
 
-.droplet1,
-.droplet2,
-.droplet3 {
+.rain .droplet1,
+.rain .droplet2,
+.rain .droplet3 {
   -webkit-animation: rain2 linear 1.5s infinite .75s;
   -moz-animation: rain2 linear 1.5s infinite .75s;
   -ms-animation: rain2 linear 1.5s infinite .75s;
@@ -3214,9 +3214,9 @@ ul li a:focus {
   animation: rain2 linear 1.5s infinite .75s;
 }
 
-.droplet4,
-.droplet5,
-.droplet6 {
+.rain .droplet4,
+.rain .droplet5,
+.rain .droplet6 {
   -webkit-animation: rain linear 1.5s infinite;
   -moz-animation: rain linear 1.5s infinite;
   -ms-animation: rain linear 1.5s infinite;

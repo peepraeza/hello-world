@@ -597,33 +597,40 @@
   })(jQuery);
 
 
-  function initMap() {
+function initMap() {
     // Create a map object and specify the DOM element for display.
 		var test = {{ station }};
 		var i;
 		var locations = [];
-
 		for (i = 0; i < test.length; i++) {
-    	locations.push({lat:test[i][0], lng:test[i][1]});
+    	locations.push({lat:test[i][0], lng:test[i][1] ,info:test[i][0].toString()+' , '+test[i][1].toString()});
 		}
+
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 13.736717, lng: 100.523186},
       zoom: 5
       //mapTypeId:google.maps.MapTypeId.HYBRID
     });
-    /*var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
-            position: location,
-            label: labels[i % labels.length]
-          });
-        });*/
+
+		var infoWin = new google.maps.InfoWindow();
+  	var markers = locations.map(function(location, i) {
+		  var marker = new google.maps.Marker({
+		    position: location
+		  });
+		  google.maps.event.addListener(marker, 'click', function(evt) {
+		    infoWin.setContent(location.info);
+		    infoWin.open(map, marker);
+		  })
+		  return marker;
+  });
 
         // Add a marker clusterer to manage the markers.
     var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    //}  
-		var infowindow = new google.maps.InfoWindow;
+
+} 
+		
+		/*var infowindow = new google.maps.InfoWindow;
 
 		var marker, i;
 
@@ -634,12 +641,14 @@
 			});
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
-					infowindow.setContent(locations[i]['lat'].toString()+locations[i]['lng'].toString());
+					infowindow.setContent(locations[i]['lat'].toString()+','+locations[i]['lng'].toString());
 					infowindow.open(map, marker);
 				}
 			})(marker, i));
 		}
-	}
+		var markerCluster = new MarkerClusterer(map, marker,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+	}*/
 
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

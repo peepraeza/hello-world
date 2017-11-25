@@ -70,19 +70,11 @@
             <div class="panel-body">
                 <div class="col-md-6 col-sm-12">
                     <h3 class="animated fadeInLeft">Customer Service</h3>
-                    <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Batavia,Indonesia</p>
-
-                    <ul class="nav navbar-nav">
-                        <li><a href="">Impedit</a></li>
-                        <li><a href="" class="active">Virtute</a></li>
-                        <li><a href="">Euismod</a></li>
-                        <li><a href="">Explicar</a></li>
-                        <li><a href="">Rebum</a></li>
-                    </ul>
+                    <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Bangkok,Thailand</p>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="col-md-6 col-sm-6 text-right" style="padding-left:10px;">
-                        <h3 style="color:#DDDDDE;"><span class="fa  fa-map-marker"></span> Banyumas</h3>
+                        <h3 style="color:#DDDDDE;"><span class="fa  fa-map-marker"></span> Bangkok</h3>
                         <h1 style="margin-top: -10px;color: #ddd;">30<sup>o</sup></h1>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -134,6 +126,7 @@
                                 </div>
                                 <div class="panel-body text-center">
                                     <h1>280</h1>
+                                    <p>Kelvin</p>
 
                                 </div>
                             </div>
@@ -154,6 +147,7 @@
                                 </div>
                                 <div class="panel-body text-center">
                                     <h1>28</h1>
+                                    <p>Cubic meter</p>
                                 </div>
                             </div>
                         </div>
@@ -174,18 +168,9 @@
 
                             <div class="panel-body">
                                 <div class="col-md-12 padding-0 text-center">
-                                    <div class="col-md-5 col-sm-5 col-xs-6 padding-0">
-                                        <h3>1/5/2017</h3>
-                                        <p>Start</p>
+                                    <div class="col-md-12 col-sm-12 col-xs-6 padding-0">
+                                        <h3>27/7/2017</h3>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-6 padding-0">
-                                        <h3>-</h3>
-                                    </div>
-                                    <div class="col-md-5 col-sm-5 col-xs-6 padding-0">
-                                        <h3>3/5/2017</h3>
-                                        <p>End</p>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -626,35 +611,35 @@
       zoom: 5
       //mapTypeId:google.maps.MapTypeId.HYBRID
     });
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    /*var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
             position: location,
             label: labels[i % labels.length]
           });
-        });
+        });*/
 
         // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-      }
-		/*var infowindow = new google.maps.InfoWindow;
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    //}  
+		var infowindow = new google.maps.InfoWindow;
 
 		var marker, i;
 
 		for (i = 0; i < locations.length; i++) {
 			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+				position: new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']),
 				map: map
 			});
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
-					infowindow.setContent(locations[i][0]);
+					infowindow.setContent(locations[i]['lat'].toString()+locations[i]['lng'].toString());
 					infowindow.open(map, marker);
 				}
 			})(marker, i));
 		}
-	}*/
+	}
 
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

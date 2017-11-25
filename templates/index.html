@@ -11,38 +11,79 @@
 
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
-
-		<link rel="stylesheet" type="text/css" href="static/source/jsCalendar.css">
+		
 
 		<!-- jsCalendar -->
-		<script type="text/javascript" src="static/source/jsCalendar.js"></script>
+		
+		<link rel="stylesheet" href="static/src/calendar.css">
+		<script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="static/src/calendar.js"></script>
 
     <!-- plugins -->
     <link rel="stylesheet" type="text/css" href="static/css/plugins/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/css/plugins/simple-line-icons.css"/>
     <link rel="stylesheet" type="text/css" href="static/css/plugins/animate.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/css/plugins/fullcalendar.min.css"/>
     <link href="static/css/style.css" rel="stylesheet">
     <!-- end: Css -->
 
     <link rel="shortcut icon" href="static/img/logomi.png">
-    <style>
-		/* Always set the map height explicitly to define the size of the div
-		 * element that contains the map. */
+
+    <style type="text/css">
 		#map {
 			height: 500px;
 			width: 100%;
 		}
-
+		ul,
+		ol,
+		li {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+		}
+		#one .prev,#one .next, #one a{
+			line-height:10px;
+		}
+		
     </style>
 </head>
 
 <body id="mimin" class="dashboard">
+
+
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">
-    <a class="navbar-brand">
-        <b>Climate</b>
-    </a>
+  <div class="col-md-12 nav-wrapper">
+    <div class="navbar-header" style="width:100%;">
+      <div class="opener-left-menu is-open">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
+        <a class="navbar-brand"> 
+         <b>Deep Travel</b>
+        </a>
+
+      <ul class="nav navbar-nav search-nav">
+        <li>
+           <div class="search">
+            <span class="fa fa-search icon-search" style="font-size:23px;"></span>
+            <div class="form-group form-animate-text">
+              <input type="text" class="form-text" required>
+              <span class="bar"></span>
+              <label class="label-search">Type anywhere to <b>Search</b> </label>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right user-nav">
+        <li class="user-name"><span>ขบวนการห้าสี</span></li>
+          <li class="dropdown avatar-dropdown" style="padding-right:20px;">
+           <img src="static/img/avatar.jpg" class="img-circle avatar" alt="user name" aria-haspopup="true" aria-expanded="true"/>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
 <!-- end: Header -->
 
@@ -69,12 +110,12 @@
         <div class="panel">
             <div class="panel-body">
                 <div class="col-md-6 col-sm-12">
-                    <h3 class="animated fadeInLeft">Customer Service</h3>
-                    <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Bangkok,Thailand</p>
+                    <h3 id="set_name" class="animated fadeInLeft">Customer Service</h3>
+                    <p class="animated fadeInDown"><span class="fa fa-map-marker"></span>   Thailand</p>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="col-md-6 col-sm-6 text-right" style="padding-left:10px;">
-                        <h3 style="color:#DDDDDE;"><span class="fa  fa-map-marker"></span> Bangkok</h3>
+                        <h3 id='set_val' style="color:#DDDDDE;">สภาพภูมิอากาศ</h3>
                         <h1 style="margin-top: -10px;color: #ddd;">30<sup>o</sup></h1>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -169,32 +210,29 @@
                             <div class="panel-body">
                                 <div class="col-md-12 padding-0 text-center">
                                     <div class="col-md-12 col-sm-12 col-xs-6 padding-0">
-                                        <h3>27/7/2017</h3>
+                                        <h3 id="set_date"></h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-12 padding-0">
                         <div class="panel box-v3" style="padding:0;">
                             <div class="panel-heading bg-white border-none">
                                 <h4>Select Date</h4>
                             </div>
-														<center>
-																<!--calender-->
-                                <div class="auto-jsCalendar material-theme"></div>
+															<!--calender--> 
+																<center>                            
+																		<div id="one"></div>	
+																</center>														 	
                                 <!--end calendar-->
-														</center>
                             <div class="panel-footer bg-white border-none">
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 card-wrap padding-0">
-
                     <div class="col-md-6">
                         <div class="panel">
                           <div class="panel-heading bg-white border-none" style="padding:20px;">
@@ -234,14 +272,17 @@
                           </div>
                           <div class="panel-body" style="padding-bottom:62px;">
                               <div id="canvas-holder1">
-                                <canvas class="bar-chart" style="margin-top:30px;height:200px;"></canvas>
+                                <canvas class="doughnut-chart"></canvas>
                               </div>
-                              <div class="col-md-12 padding-0" >
-
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <h4>IR13</h4>
-                                    <p>แสดงข้อมูลความสูงของระดับยอดเมฆ</p>
-                                </div>
+                              <div class="col-md-12" style="padding-top:40px;" >
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+                                      <h2 style="line-height:.4;">72%</h2>
+                                      <small>Like</small>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+                                      <h2 style="line-height:.4;">28%</h2>
+                                      <small>Dislike</small>
+                                  </div>
                               </div>
                           </div>
                         </div>
@@ -251,23 +292,10 @@
                 <div class="col-md-12">
                     <div class="panel bg-green text-white">
                         <div class="panel-body">
-                          <div class="col-md-8 col-sm-8 col-xs-12">
-
-                            <div class="maps" style="height:300px;">
-                            </div>
+                          <div class="col-md-8 col-sm-8 col-xs-12">                   
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <canvas class="doughnut-chart hidden-xs"></canvas>
-                            <div class="col-md-12">
-                                <div class="col-md-6 col-sm-12 col-xs-12">
-                                    <h1>72.993</h1>
-                                    <p>People</p>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12">
-                                    <h1>12.000</h1>
-                                    <p>Active</p>
-                                </div>
-                            </div>
+                                                      
                         </div>
                     </div>
                 </div>
@@ -277,6 +305,32 @@
     <!-- end: content -->
 </div>
 
+<script>
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var $ca = $('#one').calendar({
+        width: 300,
+        height: 320,
+        data: null,
+				weekArray: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        monthArray: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        date: now,
+        onSelected: function (view, date, data) {
+            console.log('view:' + view)
+            console.log('date:' + date)
+						var y = date.getFullYear();
+						var m = date.getMonth() + 1;
+						var d = date.getDate();
+						$("#set_date").text(d+'/'+m+'/'+y);
+        },
+        viewChange: function (view, y, m) {
+            console.log(view, y, m)
+        }
+    });
+</script>
+
 <!-- start: Javascript -->
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/jquery.ui.min.js"></script>
@@ -285,7 +339,6 @@
 
 <!-- plugins -->
 <script src="static/js/plugins/moment.min.js"></script>
-<script src="static/js/plugins/fullcalendar.min.js"></script>
 <script src="static/js/plugins/jquery.nicescroll.js"></script>
 <script src="static/js/plugins/jquery.vmap.min.js"></script>
 <script src="static/js/plugins/maps/jquery.vmap.world.js"></script>
@@ -297,9 +350,13 @@
 <script src="static/js/main.js"></script>
 <script type="text/javascript">
   (function(jQuery){
+		var now = new Date();
+		var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+		$("#set_date").text(date+'/'+month+'/'+year);
 
     // start: Chart =============
-
     Chart.defaults.global.pointHitDetectionRadius = 1;
     Chart.defaults.global.customTooltips = function(tooltip) {
 
@@ -354,16 +411,7 @@
             pointHighlightStroke: "rgba(220,220,220,1)",
              data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0,
                     0.0, 0.0, 16.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        }/*, {
-            label: "My Second dataset",
-            fillColor: "rgba(21,113,186,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [4,7,5,7,4.5,4,5,4.5,6,5.6,7.5]
-        }*/]
+        }]
     };
 
     var doughnutData = [
@@ -441,14 +489,7 @@
                      "16.00", "17.00", "18.00", "19.00", "20.00", "21.00", "22.00", "23.00"],
 
             datasets: [
-                /*{
-                    label: "My First dataset",
-                    fillColor: "rgba(21,186,103,0.4)",
-                    strokeColor: "rgba(220,220,220,0.8)",
-                    highlightFill: "rgba(21,186,103,0.2)",
-                    highlightStroke: "rgba(21,186,103,0.2)",
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },*/
+
                 {
                     label: "My Second dataset",
                     fillColor: "rgba(21,113,186,0.5)",
@@ -491,87 +532,6 @@
 
         };
 
-    //  end:  Chart =============
-
-    // start: Calendar =========
-     $('.dashboard .calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        defaultDate: '2015-02-12',
-        businessHours: true, // display business hours
-        editable: true,
-        events: [
-            {
-                title: 'Business Lunch',
-                start: '2015-02-03T13:00:00',
-                constraint: 'businessHours'
-            },
-            {
-                title: 'Meeting',
-                start: '2015-02-13T11:00:00',
-                constraint: 'availableForMeeting', // defined below
-                color: '#20C572'
-            },
-            {
-                title: 'Conference',
-                start: '2015-02-18',
-                end: '2015-02-20'
-            },
-            {
-                title: 'Party',
-                start: '2015-02-29T20:00:00'
-            },
-
-            // areas where "Meeting" must be dropped
-            {
-                id: 'availableForMeeting',
-                start: '2015-02-11T10:00:00',
-                end: '2015-02-11T16:00:00',
-                rendering: 'background'
-            },
-            {
-                id: 'availableForMeeting',
-                start: '2015-02-13T10:00:00',
-                end: '2015-02-13T16:00:00',
-                rendering: 'background'
-            },
-
-            // red areas where no events can be dropped
-            {
-                start: '2015-02-24',
-                end: '2015-02-28',
-                overlap: false,
-                rendering: 'background',
-                color: '#FF6656'
-            },
-            {
-                start: '2015-02-06',
-                end: '2015-02-08',
-                overlap: true,
-                rendering: 'background',
-                color: '#FF6656'
-            }
-        ]
-    });
-    // end : Calendar==========
-        $('#calendar').fullCalendar({
-        selectable: true,
-        select: function(start, end, jsEvent, view) {
-             // start contains the date you have selected
-             // end contains the end date.
-             // Caution: the end date is exclusive (new since v2).
-             var allDay = !start.hasTime() && !end.hasTime();
-             alert(["Event Start date: " + moment(start).format(),
-                    "Event End date: " + moment(end).format(),
-                    "AllDay: " + allDay].join("\n"));
-        }
-    });
-
-    // start: Maps============
-
       jQuery('.maps').vectorMap({
         map: 'world_en',
         backgroundColor: null,
@@ -584,72 +544,53 @@
         scaleColors: ['#C8EEFF', '#006491'],
         normalizeFunction: 'polynomial'
     });
-
     // end: Maps==============
 
   })(jQuery);
 
 
-function initMap() {
-    // Create a map object and specify the DOM element for display.
-		var test = {{ station }};
-		var i;
-		var locations = [];
-		for (i = 0; i < test.length; i++) {
-    	locations.push({lat:test[i][0], lng:test[i][1] ,info:test[i][0].toString()+' , '+test[i][1].toString()});
-		}
+	function initMap() {
+		  // Create a map object and specify the DOM element for display.
+			var test = {{ station }};
+			var f= {{ ads|tojson }};
+			var test2 = jQuery.parseJSON(f);
+			var i;
+			var locations = [];
+			for (i = 0; i < test.length; i++) {
+		  	locations.push({lat:test[i][0], lng:test[i][1], info:test2[i][0]});
+			}
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 16.06403, lng: 102.5684},
-      zoom: 15
-      //mapTypeId:google.maps.MapTypeId.HYBRID
-    });
-
-		var infoWin = new google.maps.InfoWindow();
-  	var markers = locations.map(function(location, i) {
-		  var marker = new google.maps.Marker({
-		    position: location
+		  var map = new google.maps.Map(document.getElementById('map'), {
+		    center: {lat: 13.736717, lng: 100.523186},
+		    zoom: 5
+		    //mapTypeId:google.maps.MapTypeId.HYBRID
 		  });
-		  google.maps.event.addListener(marker, 'click', function(evt) {
-		    infoWin.setContent(location.info);
-		    infoWin.open(map, marker);
-		  })
-		  return marker;
-  });
 
-        // Add a marker clusterer to manage the markers.
-    var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-}
-
-		/*var infowindow = new google.maps.InfoWindow;
-
-		var marker, i;
-
-		for (i = 0; i < locations.length; i++) {
-			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']),
-				map: map
-			});
-			google.maps.event.addListener(marker, 'click', (function(marker, i) {
-				return function() {
-					infowindow.setContent(locations[i]['lat'].toString()+','+locations[i]['lng'].toString());
-					infowindow.open(map, marker);
-				}
-			})(marker, i));
-		}
-		var markerCluster = new MarkerClusterer(map, marker,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-	}*/
+			var infoWin = new google.maps.InfoWindow();
+			var markers = locations.map(function(location, i) {
+				var marker = new google.maps.Marker({
+				  position: location
+				});
+				google.maps.event.addListener(marker, 'click', function(evt) {
+					$("#set_name").text(location.info);
+				  infoWin.setContent(location.info);
+				  infoWin.open(map, marker);
+				})
+				return marker;
+		});
+		      // Add a marker clusterer to manage the markers.
+		  var markerCluster = new MarkerClusterer(map, markers,
+		      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+	}
 
 </script>
+
+
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-   </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjE02o0x9218Hz1McqFlrN3quz545-Vcs&callback=initMap"
-        async defer>
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjE02o0x9218Hz1McqFlrN3quz545-Vcs&callback=initMap"
+        async defer></script>
+
 <!-- end: Javascript -->
 </body>
 </html>

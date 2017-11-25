@@ -199,7 +199,7 @@
                         <div class="panel">
                           <div class="panel-heading bg-white border-none" style="padding:20px;">
                             <div class="col-md-6 col-sm-6 col-sm-12 text-left">
-                              <h4>Line Chart</h4>
+                              <h4>Rain Volumn</h4>
                             </div>
                           </div>
                           <div class="panel-body" style="padding-bottom:50px;">
@@ -208,11 +208,11 @@
                               </div>
                               <div class="col-md-12" style="padding-top:20px;">
                                   <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                      <h2 style="line-height:.4;">48.0</h2>
+                                      <h2 style="line-height:.4;">17.0</h2>
                                       <small>Total Rain Volumn</small>
                                   </div>
                                   <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                      <h2 style="line-height:.4;">5.0</h2>
+                                      <h2 style="line-height:.4;">16.5</h2>
                                       <small>Maximum</small>
                                   </div>
                                   <div class="col-md-4 col-sm-4 col-xs-12 text-center">
@@ -229,25 +229,18 @@
                         <div class="panel">
                           <div class="panel-heading bg-white border-none" style="padding:20px;">
                             <div class="col-md-6 col-sm-6 col-sm-12 text-left">
-                              <h4>Orders</h4>
+                              <h4>IR13</h4>
                             </div>
                           </div>
-                          <div class="panel-body" style="padding-bottom:50px;">
+                          <div class="panel-body" style="padding-bottom:62px;">
                               <div id="canvas-holder1">
                                 <canvas class="bar-chart" style="margin-top:30px;height:200px;"></canvas>
                               </div>
                               <div class="col-md-12 padding-0" >
-                                <div class="col-md-4 col-sm-4 hidden-xs" style="padding-top:20px;">
-                                  <canvas class="doughnut-chart2"></canvas>
-                                </div>
+
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <h4>Progress Produksi barang</h4>
-                                    <p>Sed hendrerit. Curabitur blandit mollis lacus. Duis leo. Sed libero.fusce commodo aliquam arcu..</p>
-                                    <div class="progress progress-mini">
-                                      <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                        <span class="sr-only">60% Complete</span>
-                                      </div>
-                                    </div>
+                                    <h4>IR13</h4>
+                                    <p>แสดงข้อมูลความสูงของระดับยอดเมฆ</p>
                                 </div>
                               </div>
                           </div>
@@ -359,8 +352,8 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-             data: [0.0, 0.5, 2.5, 2.0, 0.5, 0.0, 0.0, 0.5, 0.5, 2.5, 4.5, 3.0,
-                    2.0, 2.5, 0.5, 4.0, 2.0, 5.0, 4.5, 2.0, 1.0, 2.0, 3.0, 3.0]
+             data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0,
+                    0.0, 0.0, 16.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         }/*, {
             label: "My Second dataset",
             fillColor: "rgba(21,113,186,0.5)",
@@ -462,9 +455,9 @@
                     strokeColor: "rgba(151,187,205,0.8)",
                     highlightFill: "rgba(21,113,186,0.2)",
                     highlightStroke: "rgba(21,113,186,0.2)",
-                    data: [286.4, 280.3, 279.4, 276.4, 280.4, 288, 290, 287,
-                           286.4, 280.3, 279.4, 276.4, 280.4, 288, 290, 287,
-                           286.4, 280.3, 279.4, 276.4, 280.4, 288, 290, 287]
+                    data: [288.88, 289.46, 275.21, 269.60, 284.86, 285.66, 271.87, 200.23,
+                           202.92, 211.22, 237.09, 256.97, 279.29, 259.42, 268.04, 289.67,
+                           288.47, 286.03, 283.40, 281.77, 281.86, 266.02, 282.76, 277.31]
                 }
             ]
         };
@@ -607,8 +600,8 @@ function initMap() {
 		}
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 13.736717, lng: 100.523186},
-      zoom: 5
+      center: {lat: 16.06403, lng: 102.5684},
+      zoom: 15
       //mapTypeId:google.maps.MapTypeId.HYBRID
     });
 
@@ -628,8 +621,8 @@ function initMap() {
     var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
-} 
-		
+}
+
 		/*var infowindow = new google.maps.InfoWindow;
 
 		var marker, i;

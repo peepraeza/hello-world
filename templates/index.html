@@ -572,9 +572,11 @@
 				  position: location
 				});
 				google.maps.event.addListener(marker, 'click', function(evt) {
+					$('html,body').scrollTop(0);
 					$("#set_name").text(location.info);
 				  infoWin.setContent(location.info);
 				  infoWin.open(map, marker);
+					
 				})
 				return marker;
 		});
